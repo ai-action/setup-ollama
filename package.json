@@ -42,7 +42,7 @@
     "prettier": "3.5.3",
     "ts-jest": "29.3.1",
     "ts-node": "10.9.2",
-    "typescript": "5.7.3"
+    "typescript": "5.8.3"
   },
   "private": true,
   "license": "MIT"
