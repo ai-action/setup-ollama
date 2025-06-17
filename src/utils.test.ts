@@ -11,9 +11,9 @@ const architectures = ['arm64', 'x64'] as const;
 const table = platforms.reduce(
   (testSuites, os) => [
     ...testSuites,
-    ...architectures.map((arch) => [os, arch] as [string, string]),
+    ...architectures.map((arch) => [os, arch] as [string, NodeJS.Architecture]),
   ],
-  [] as [string, string][],
+  [] as [string, NodeJS.Architecture][],
 );
 
 describe('getDownloadObject', () => {
