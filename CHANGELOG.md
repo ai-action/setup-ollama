@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.2.44](https://github.com/ai-action/setup-ollama/compare/v1.2.43...v1.2.44) (2025-12-19)
+
+
+### Build System
+
+* **deps:** bump ollama from 0.13.4 to 0.13.5 ([cfc8bc9](https://github.com/ai-action/setup-ollama/commit/cfc8bc9547a98eafb33644ba5a5222ad68536dab))
+
+## [1.2.43](https://github.com/ai-action/setup-ollama/compare/v1.2.42...v1.2.43) (2025-12-17)
+
+
+### Build System
+
+* **deps:** bump ollama from 0.13.3 to 0.13.4 ([36e8033](https://github.com/ai-action/setup-ollama/commit/36e8033538dcef1b28c7eda1d9785b319fc4d710))
+
+## [1.2.42](https://github.com/ai-action/setup-ollama/compare/v1.2.41...v1.2.42) (2025-12-16)
+
+
+### Build System
+
+* **deps:** bump ollama from 0.13.2 to 0.13.3 ([5b2f785](https://github.com/ai-action/setup-ollama/commit/5b2f78501706caa63da24e0e1addd88240e2a8b7))
+
+## [1.2.41](https://github.com/ai-action/setup-ollama/compare/v1.2.40...v1.2.41) (2025-12-15)
+
+
+### Build System
+
+* **deps:** bump ollama from 0.13.1 to 0.13.2 ([bebd774](https://github.com/ai-action/setup-ollama/commit/bebd77421112e4e9c76ff39a1aca29da11da42d2))
+
 ## [1.2.40](https://github.com/ai-action/setup-ollama/compare/v1.2.39...v1.2.40) (2025-12-03)
 
 

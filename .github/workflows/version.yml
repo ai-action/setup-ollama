@@ -33,6 +33,6 @@ jobs:
           HUSKY: 0
 
       - name: Update version
-        run: scripts/version.sh
+        run: bash scripts/version.sh
         env:
           GH_TOKEN: ${{ github.token }}
