@@ -1,16 +1,18 @@
+import { type ChildProcess, spawn } from 'node:child_process';
+import os from 'node:os';
+
 import * as core from '@actions/core';
 import * as exec from '@actions/exec';
 import * as tc from '@actions/tool-cache';
-import { type ChildProcess, spawn } from 'child_process';
-import os from 'os';
+import { gte } from 'semver';
 
 import { run } from '.';
 
 jest.mock('@actions/core');
 jest.mock('@actions/exec');
 jest.mock('@actions/tool-cache');
-jest.mock('child_process');
-jest.mock('os');
+jest.mock('node:child_process');
+jest.mock('node:os');
 
 const mockedCore = jest.mocked(core);
 const mockedExec = jest.mocked(exec);
@@ -22,13 +24,16 @@ beforeEach(() => {
   jest.resetAllMocks();
 });
 
-const cliName = 'cli-name';
-const cliVersion = '1.2.3';
+const name = 'cli-name';
 const pathToTarball = 'path/to/tarball';
 const pathToCLI = 'path/to/cli';
-const platforms = ['darwin', 'win32', 'linux'];
 
-describe.each(platforms)('when platform is %p', (platform) => {
+describe.each([
+  ['darwin', '0.14.0'],
+  ['win32', '0.14.0'],
+  ['linux', '0.13.5'],
+  ['linux', '0.14.0'],
+])('when platform is %p and version is %p', (platform, version) => {
   beforeEach(() => {
     mockedOs.platform.mockReturnValue(platform as NodeJS.Platform);
     mockedOs.arch.mockReturnValue('arm64');
@@ -36,9 +41,9 @@ describe.each(platforms)('when platform is %p', (platform) => {
     mockedCore.getInput.mockImplementation((input) => {
       switch (input) {
         case 'version':
-          return cliVersion;
+          return version;
         case 'name':
-          return cliName;
+          return name;
         default:
           // eslint-disable-next-line no-console
           console.error(`Invalid input: ${input}`);
@@ -48,7 +53,7 @@ describe.each(platforms)('when platform is %p', (platform) => {
   });
 
   const binPath = platform === 'linux' ? `${pathToCLI}/bin` : pathToCLI;
-  const cliPath = `${binPath}/${cliName}`;
+  const cliPath = `${binPath}/${name}`;
 
   it('downloads, extracts, and adds CLI to PATH', async () => {
     mockedTc.downloadTool.mockResolvedValueOnce(pathToTarball);
@@ -64,7 +69,13 @@ describe.each(platforms)('when platform is %p', (platform) => {
       expect.stringContaining('https://ollama.com/download/ollama-'),
     );
 
-    expect(extract).toHaveBeenCalledWith(pathToTarball);
+    expect(extract).toHaveBeenCalledWith(
+      pathToTarball,
+      undefined,
+      platform === 'linux' && gte(version, '0.14.0')
+        ? ['--use-compress-program=zstd', '-x']
+        : undefined,
+    );
 
     const extension = isWin32 ? '.exe' : '';
     expect(mockedExec.exec).toHaveBeenCalledWith('mv', [
@@ -74,14 +85,14 @@ describe.each(platforms)('when platform is %p', (platform) => {
 
     expect(mockedTc.cacheFile).toHaveBeenCalledWith(
       cliPath + extension,
-      cliName + extension,
-      cliName,
-      cliVersion,
+      name + extension,
+      name,
+      version,
     );
 
     expect(mockedCore.addPath).toHaveBeenCalledWith(binPath);
 
-    expect(mockedSpawn).toHaveBeenCalledWith(cliName, ['serve'], {
+    expect(mockedSpawn).toHaveBeenCalledWith(name, ['serve'], {
       detached: true,
       stdio: 'ignore',
     });

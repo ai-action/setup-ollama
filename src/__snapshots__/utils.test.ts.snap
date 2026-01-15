@@ -6,44 +6,86 @@ exports[`getBinaryPath when OS is "linux" returns CLI filepath 1`] = `"directory
 
 exports[`getBinaryPath when OS is "win32" returns CLI filepath 1`] = `"directory/name.exe"`;
 
-exports[`getDownloadObject when OS is "darwin" and arch is "arm64" gets download object 1`] = `
+exports[`getDownloadObject when platform is "darwin" and arch is "arm64" gets download object 1`] = `
 {
   "binaryDirectory": "",
-  "url": "https://ollama.com/download/ollama-darwin.tgz?version=0.5.10",
+  "url": "https://ollama.com/download/ollama-darwin.tgz?version=0.13.5",
 }
 `;
 
-exports[`getDownloadObject when OS is "darwin" and arch is "x64" gets download object 1`] = `
+exports[`getDownloadObject when platform is "darwin" and arch is "arm64" gets download object 2`] = `
 {
   "binaryDirectory": "",
-  "url": "https://ollama.com/download/ollama-darwin.tgz?version=0.5.10",
+  "url": "https://ollama.com/download/ollama-darwin.tgz?version=0.14.0",
 }
 `;
 
-exports[`getDownloadObject when OS is "linux" and arch is "arm64" gets download object 1`] = `
+exports[`getDownloadObject when platform is "darwin" and arch is "x64" gets download object 1`] = `
+{
+  "binaryDirectory": "",
+  "url": "https://ollama.com/download/ollama-darwin.tgz?version=0.13.5",
+}
+`;
+
+exports[`getDownloadObject when platform is "darwin" and arch is "x64" gets download object 2`] = `
+{
+  "binaryDirectory": "",
+  "url": "https://ollama.com/download/ollama-darwin.tgz?version=0.14.0",
+}
+`;
+
+exports[`getDownloadObject when platform is "linux" and arch is "arm64" gets download object 1`] = `
 {
   "binaryDirectory": "bin",
-  "url": "https://ollama.com/download/ollama-linux-arm64.tgz?version=0.5.10",
+  "url": "https://ollama.com/download/ollama-linux-arm64.tgz?version=0.13.5",
 }
 `;
 
-exports[`getDownloadObject when OS is "linux" and arch is "x64" gets download object 1`] = `
+exports[`getDownloadObject when platform is "linux" and arch is "arm64" gets download object 2`] = `
 {
   "binaryDirectory": "bin",
-  "url": "https://ollama.com/download/ollama-linux-amd64.tgz?version=0.5.10",
+  "url": "https://ollama.com/download/ollama-linux-arm64.tar.zst?version=0.14.0",
 }
 `;
 
-exports[`getDownloadObject when OS is "win32" and arch is "arm64" gets download object 1`] = `
+exports[`getDownloadObject when platform is "linux" and arch is "x64" gets download object 1`] = `
 {
-  "binaryDirectory": "",
-  "url": "https://ollama.com/download/ollama-windows-arm64.zip?version=0.5.10",
+  "binaryDirectory": "bin",
+  "url": "https://ollama.com/download/ollama-linux-amd64.tgz?version=0.13.5",
 }
 `;
 
-exports[`getDownloadObject when OS is "win32" and arch is "x64" gets download object 1`] = `
+exports[`getDownloadObject when platform is "linux" and arch is "x64" gets download object 2`] = `
+{
+  "binaryDirectory": "bin",
+  "url": "https://ollama.com/download/ollama-linux-amd64.tar.zst?version=0.14.0",
+}
+`;
+
+exports[`getDownloadObject when platform is "win32" and arch is "arm64" gets download object 1`] = `
 {
   "binaryDirectory": "",
-  "url": "https://ollama.com/download/ollama-windows-amd64.zip?version=0.5.10",
+  "url": "https://ollama.com/download/ollama-windows-arm64.zip?version=0.13.5",
+}
+`;
+
+exports[`getDownloadObject when platform is "win32" and arch is "arm64" gets download object 2`] = `
+{
+  "binaryDirectory": "",
+  "url": "https://ollama.com/download/ollama-windows-arm64.zip?version=0.14.0",
+}
+`;
+
+exports[`getDownloadObject when platform is "win32" and arch is "x64" gets download object 1`] = `
+{
+  "binaryDirectory": "",
+  "url": "https://ollama.com/download/ollama-windows-amd64.zip?version=0.13.5",
+}
+`;
+
+exports[`getDownloadObject when platform is "win32" and arch is "x64" gets download object 2`] = `
+{
+  "binaryDirectory": "",
+  "url": "https://ollama.com/download/ollama-windows-amd64.zip?version=0.14.0",
 }
 `;

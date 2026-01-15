@@ -1,10 +1,12 @@
-import os from 'os';
-import path from 'path';
+import os from 'node:os';
+import path from 'node:path';
 
-const ARCHITECTURE = {
-  arm64: 'arm64',
-  x64: 'amd64',
-} as const;
+import { gte } from 'semver';
+
+enum Architecture {
+  arm64 = 'arm64',
+  x64 = 'amd64',
+}
 
 /**
  * Gets the operating system CPU architecture.
@@ -15,14 +17,14 @@ const ARCHITECTURE = {
  * @returns - Return value in [arm64, amd64]
  */
 function getArch(arch: NodeJS.Architecture) {
-  return ARCHITECTURE[arch as keyof typeof ARCHITECTURE] || arch;
+  return Architecture[arch as keyof typeof Architecture] || arch;
 }
 
-const PLATFORM = {
-  darwin: 'darwin',
-  linux: 'linux',
-  win32: 'windows',
-} as const;
+enum Platform {
+  darwin = 'darwin',
+  linux = 'linux',
+  win32 = 'windows',
+}
 
 /**
  * Gets a string identifying the operating system platform.
@@ -33,7 +35,7 @@ const PLATFORM = {
  * @returns - Return value in [darwin, linux, windows]
  */
 function getOS(os: NodeJS.Platform) {
-  return PLATFORM[os as keyof typeof PLATFORM] || os;
+  return Platform[os as keyof typeof Platform] || os;
 }
 
 /**
@@ -41,7 +43,7 @@ function getOS(os: NodeJS.Platform) {
  *
  * @see {@link https://github.com/ollama/ollama/releases}
  *
- * @param version - CLI version
+ * @param version - Ollama version
  * @returns - URL and binary path
  */
 export function getDownloadObject(version: string) {
@@ -58,7 +60,7 @@ export function getDownloadObject(version: string) {
       break;
 
     case 'linux':
-      extension = '.tgz';
+      extension = hasZst(version) ? '.tar.zst' : '.tgz';
       break;
 
     case 'win32':
@@ -81,4 +83,14 @@ export function getDownloadObject(version: string) {
  */
 export function getBinaryPath(directory: string, name: string) {
   return path.join(directory, name + (os.platform() === 'win32' ? '.exe' : ''));
+}
+
+/**
+ * Check if Ollama version uses `zst` compression.
+ *
+ * @param version - Ollama version
+ * @returns - Whether Ollama version uses `zst`
+ */
+export function hasZst(version: string) {
+  return os.platform() === 'linux' && gte(version, '0.14.0');
 }
