@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.8](https://github.com/ai-action/setup-ollama/compare/v2.0.7...v2.0.8) (2026-01-29)
+
+
+### Build System
+
+* **deps:** bump @actions/core from 2.0.2 to 2.0.3 ([#386](https://github.com/ai-action/setup-ollama/issues/386)) ([b98d254](https://github.com/ai-action/setup-ollama/commit/b98d254b5ea1e0af647262296a9267ffab303fb9))
+* **deps:** bump @actions/tool-cache from 3.0.0 to 3.0.1 ([#385](https://github.com/ai-action/setup-ollama/issues/385)) ([2bbfe00](https://github.com/ai-action/setup-ollama/commit/2bbfe00a096ea8e43c87df3448770983eb764c97))
+
 ## [2.0.7](https://github.com/ai-action/setup-ollama/compare/v2.0.6...v2.0.7) (2026-01-27)
 
 
