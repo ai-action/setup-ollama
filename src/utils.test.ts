@@ -1,9 +1,15 @@
-import os from 'node:os';
+import type os from 'node:os';
 
-import { getBinaryPath, getDownloadObject, hasZst } from './utils';
+import { jest } from '@jest/globals';
 
-jest.mock('node:os');
-const mockedOs = jest.mocked(os);
+jest.unstable_mockModule('node:os', () => ({
+  platform: jest.fn(),
+  arch: jest.fn(),
+}));
+
+const { getBinaryPath, getDownloadObject, hasZst } = await import('./utils');
+
+const mockedOs = (await import('node:os')) as unknown as jest.Mocked<typeof os>;
 
 const platforms = ['darwin', 'linux', 'win32'] as const;
 const architectures = ['arm64', 'x64'] as const;
@@ -23,7 +29,7 @@ describe.each(['0.13.5', '0.14.0'])('getDownloadObject', (version) => {
     'when platform is %p and arch is %p',
     (platform, arch) => {
       beforeEach(() => {
-        jest.resetAllMocks();
+        jest.clearAllMocks();
         mockedOs.platform.mockReturnValue(platform as NodeJS.Platform);
         mockedOs.arch.mockReturnValueOnce(arch);
       });
@@ -36,10 +42,10 @@ describe.each(['0.13.5', '0.14.0'])('getDownloadObject', (version) => {
 });
 
 describe('getBinaryPath', () => {
-  describe.each(platforms)('when OS is %p', (os) => {
+  describe.each(platforms)('when OS is %p', (osPlatform) => {
     beforeEach(() => {
-      jest.resetAllMocks();
-      mockedOs.platform.mockReturnValueOnce(os);
+      jest.clearAllMocks();
+      mockedOs.platform.mockReturnValueOnce(osPlatform);
     });
 
     it('returns CLI filepath', () => {
@@ -68,7 +74,7 @@ describe('hasZst', () => {
 
   describe.each(cases)('when OS is %p', (version, os, expected) => {
     beforeEach(() => {
-      jest.resetAllMocks();
+      jest.clearAllMocks();
       mockedOs.platform.mockReturnValueOnce(os);
     });
 

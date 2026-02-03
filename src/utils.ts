@@ -1,5 +1,5 @@
-import os from 'node:os';
-import path from 'node:path';
+import { arch, platform } from 'node:os';
+import { join } from 'node:path';
 
 import { gte } from 'semver';
 
@@ -47,13 +47,12 @@ function getOS(os: NodeJS.Platform) {
  * @returns - URL and binary path
  */
 export function getDownloadObject(version: string) {
-  const platform = os.platform();
-  const arch = os.arch() as NodeJS.Architecture;
+  const currentPlatform = platform();
 
-  let filename = `ollama-${getOS(platform)}-${getArch(arch)}`;
+  let filename = `ollama-${getOS(currentPlatform)}-${getArch(arch())}`;
   let extension = '';
 
-  switch (platform) {
+  switch (currentPlatform) {
     case 'darwin':
       filename = 'ollama-darwin';
       extension = '.tgz';
@@ -69,7 +68,7 @@ export function getDownloadObject(version: string) {
   }
 
   return {
-    binaryDirectory: platform === 'linux' ? 'bin' : '',
+    binaryDirectory: currentPlatform === 'linux' ? 'bin' : '',
     url: `https://ollama.com/download/${filename}${extension}?version=${version}`,
   };
 }
@@ -82,7 +81,7 @@ export function getDownloadObject(version: string) {
  * @returns - Binary path
  */
 export function getBinaryPath(directory: string, name: string) {
-  return path.join(directory, name + (os.platform() === 'win32' ? '.exe' : ''));
+  return join(directory, name + (platform() === 'win32' ? '.exe' : ''));
 }
 
 /**
@@ -92,5 +91,5 @@ export function getBinaryPath(directory: string, name: string) {
  * @returns - Whether Ollama version uses `zst`
  */
 export function hasZst(version: string) {
-  return os.platform() === 'linux' && gte(version, '0.14.0');
+  return platform() === 'linux' && gte(version, '0.14.0');
 }
