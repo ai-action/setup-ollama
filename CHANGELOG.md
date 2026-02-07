@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.10](https://github.com/ai-action/setup-ollama/compare/v2.0.9...v2.0.10) (2026-02-07)
+
+
+### Build System
+
+* **deps:** bump ollama from 0.15.4 to 0.15.5 ([0e3d9fa](https://github.com/ai-action/setup-ollama/commit/0e3d9fa79e0613bb278f8f9c19cb8c550862a93b))
+
 ## [2.0.9](https://github.com/ai-action/setup-ollama/compare/v2.0.8...v2.0.9) (2026-02-03)
 
 
