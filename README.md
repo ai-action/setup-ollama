@@ -76,6 +76,36 @@ See [action.yml](action.yml).
     name: ollama
 ```
 
+## FAQ
+
+### zstd: Cannot exec: No such file or directory
+
+If you get the error on a Linux self-hosted runner:
+
+```
+tar (child): zstd: Cannot exec: No such file or directory
+tar (child): Error is not recoverable: exiting now
+```
+
+It means that [zstd](https://github.com/facebook/zstd) is not installed.
+
+To fix this error, you can install `zstd`:
+
+```yaml
+- name: Install zstd
+  run: apt-get update && apt-get install zstd
+```
+
+Or use Ollama version <[0.14.0](https://github.com/ollama/ollama/releases/tag/v0.14.0):
+
+```yaml
+- uses: ai-action/setup-ollama@v2
+  with:
+    version: 0.13.5
+```
+
+See [#423](https://github.com/ai-action/setup-ollama/issues/423).
+
 ## License
 
 [MIT](LICENSE)
