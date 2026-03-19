@@ -58,12 +58,12 @@ See [action.yml](action.yml).
 
 ### `version`
 
-**Optional**: The CLI [version](https://github.com/ollama/ollama/releases). Defaults to [`0.18.1`](https://github.com/ollama/ollama/releases/tag/v0.18.1):
+**Optional**: The CLI [version](https://github.com/ollama/ollama/releases). Defaults to [`0.18.2`](https://github.com/ollama/ollama/releases/tag/v0.18.2):
 
 ```yaml
 - uses: ai-action/setup-ollama@v2
   with:
-    version: 0.18.1
+    version: 0.18.2
 ```
 
 ### `name`
