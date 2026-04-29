@@ -10,7 +10,7 @@
     "clean": "rm -rf coverage dist",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "lint:tsc": "tsc --noEmit",
+    "lint:tsc": "tsc --project tsconfig.test.json",
     "prepare": "husky",
     "test": "node --experimental-vm-modules $(npx which jest)",
     "test:ci": "CI=true npm test -- --ci --colors --coverage",

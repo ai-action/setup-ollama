@@ -17,7 +17,11 @@ enum Architecture {
  * @returns - Return value in [arm64, amd64]
  */
 function getArch(arch: NodeJS.Architecture) {
-  return Architecture[arch as keyof typeof Architecture] || arch;
+  return (
+    (Architecture[arch as keyof typeof Architecture] as
+      | (typeof Architecture)[keyof typeof Architecture]
+      | undefined) ?? arch
+  );
 }
 
 enum Platform {
@@ -35,7 +39,7 @@ enum Platform {
  * @returns - Return value in [darwin, linux, windows]
  */
 function getOS(os: NodeJS.Platform) {
-  return Platform[os as keyof typeof Platform] || os;
+  return (Platform[os as keyof typeof Platform] as Platform | undefined) ?? os;
 }
 
 /**
