@@ -14,14 +14,14 @@ const mockedOs = (await import('node:os')) as unknown as jest.Mocked<typeof os>;
 const platforms = ['darwin', 'linux', 'win32'] as const;
 const architectures = ['arm64', 'x64'] as const;
 
-const cases = platforms.reduce(
+const cases = platforms.reduce<[NodeJS.Platform, NodeJS.Architecture][]>(
   (testSuites, platform) => [
     ...testSuites,
     ...architectures.map(
       (arch) => [platform, arch] as [NodeJS.Platform, NodeJS.Architecture],
     ),
   ],
-  [] as [NodeJS.Platform, NodeJS.Architecture][],
+  [],
 );
 
 describe.each(['0.13.5', '0.14.0'])('getDownloadObject', (version) => {
@@ -30,7 +30,7 @@ describe.each(['0.13.5', '0.14.0'])('getDownloadObject', (version) => {
     (platform, arch) => {
       beforeEach(() => {
         jest.clearAllMocks();
-        mockedOs.platform.mockReturnValue(platform as NodeJS.Platform);
+        mockedOs.platform.mockReturnValue(platform);
         mockedOs.arch.mockReturnValueOnce(arch);
       });
 
