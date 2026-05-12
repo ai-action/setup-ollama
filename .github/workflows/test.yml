@@ -75,6 +75,7 @@ jobs:
           fi
 
       - name: Run LLM
+        shell: bash
         run: |
           output=$(ollama-cli run qwen2.5:0.5b 'What model are you?')
           printf '%s\n' "$output"
