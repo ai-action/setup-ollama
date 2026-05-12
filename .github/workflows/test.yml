@@ -74,7 +74,11 @@ jobs:
             exit 1
           fi
 
-      - name: Run LLM
+      - name: Pull model
+        shell: bash
+        run: ollama-cli pull qwen2.5:0.5b
+
+      - name: Run model
         shell: bash
         run: |
           output=$(ollama-cli run qwen2.5:0.5b 'What model are you?')

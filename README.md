@@ -23,8 +23,8 @@ jobs:
       - name: Setup Ollama
         uses: ai-action/setup-ollama@v2
 
-      - name: Run LLM
-        run: ollama run gemma4:e2b 'Explain the basics of machine learning.'
+      - name: Run model
+        run: ollama run gemma4:e2b 'What model are you?'
 ```
 
 ## Usage
