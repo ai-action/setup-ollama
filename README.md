@@ -24,7 +24,7 @@ jobs:
         uses: ai-action/setup-ollama@v2
 
       - name: Run LLM
-        run: ollama run llama3.2 'Explain the basics of machine learning.'
+        run: ollama run gemma4:e2b 'Explain the basics of machine learning.'
 ```
 
 ## Usage
@@ -38,7 +38,7 @@ Install Ollama:
 Run a prompt against a [model](https://ollama.com/library):
 
 ```yaml
-- run: ollama run tinyllama "What's a large language model?"
+- run: ollama run gemma4 "What's a large language model?"
 ```
 
 Cache the model to speed up CI:
@@ -49,7 +49,7 @@ Cache the model to speed up CI:
     path: ~/.ollama
     key: ${{ runner.os }}-ollama
 
-- run: ollama run tinyllama 'Define cache'
+- run: ollama run gemma4 'Define cache'
 ```
 
 See [action.yml](action.yml).
