@@ -75,4 +75,7 @@ jobs:
           fi
 
       - name: Run LLM
-        run: ollama-cli run qwen2.5:0.5b 'Explain the basics of machine learning.'
+        run: |
+          output=$(ollama-cli run qwen2.5:0.5b 'What model are you?')
+          printf '%s\n' "$output"
+          test -n "$output"
