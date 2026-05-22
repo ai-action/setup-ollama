@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.46](https://github.com/ai-action/setup-ollama/compare/v2.0.45...v2.0.46) (2026-05-22)
+
+
+### Build System
+
+* **deps:** bump semver from 7.8.0 to 7.8.1 ([#558](https://github.com/ai-action/setup-ollama/issues/558)) ([63dd6a3](https://github.com/ai-action/setup-ollama/commit/63dd6a3db369ed83ba2e65a684420a98feed9f21))
+
 ## [2.0.45](https://github.com/ai-action/setup-ollama/compare/v2.0.44...v2.0.45) (2026-05-15)
 
 
