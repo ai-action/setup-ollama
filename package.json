@@ -12,9 +12,9 @@
     "lint:fix": "npm run lint -- --fix",
     "lint:tsc": "tsc --project tsconfig.test.json",
     "prepare": "husky",
-    "test": "node --experimental-vm-modules $(npx which jest)",
-    "test:ci": "CI=true npm test -- --ci --colors --coverage",
-    "test:watch": "npm test -- --watch"
+    "test": "vitest run",
+    "test:ci": "CI=true npm test -- --color --coverage",
+    "test:watch": "vitest --coverage.enabled=false"
   },
   "dependencies": {
     "@actions/core": "3.0.1",
@@ -28,7 +28,7 @@
     "@eslint/config-helpers": "0.6.0",
     "@eslint/eslintrc": "3.3.5",
     "@eslint/js": "10.0.1",
-    "@types/jest": "30.0.0",
+    "@vitest/coverage-v8": "4.1.8",
     "@types/node": "25.9.1",
     "@types/semver": "7.7.1",
     "@vercel/ncc": "0.38.4",
@@ -38,10 +38,9 @@
     "eslint-plugin-tsdoc": "0.5.2",
     "globals": "17.6.0",
     "husky": "9.1.7",
-    "jest": "30.4.2",
+    "vitest": "4.1.8",
     "lint-staged": "17.0.7",
     "prettier": "3.8.3",
-    "ts-jest": "29.4.11",
     "ts-node": "10.9.2",
     "typescript": "6.0.3",
     "typescript-eslint": "8.60.1"
