@@ -44,11 +44,18 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        version: [0.13.5, 0.23.0]
+        version: [0.13.5, latest]
+    env:
+      VERSION: ${{ matrix.version }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+
+      - name: Get version
+        if: matrix.version == 'latest'
+        shell: bash
+        run: echo "VERSION=$(awk '/default:/{print $2; exit}' action.yml)" >> "$GITHUB_ENV"
 
       - name: Cache ollama
         uses: actions/cache@v5
@@ -59,7 +66,7 @@ jobs:
       - name: Run action
         uses: ./
         with:
-          version: ${{ matrix.version }}
+          version: ${{ env.VERSION }}
           name: ollama-cli
 
       - name: Locate binary
@@ -68,7 +75,7 @@ jobs:
       - name: Check version
         shell: bash
         run: |
-          if [[ "$(ollama-cli --version)" != *'${{ matrix.version }}'* ]]; then
+          if [[ "$(ollama-cli --version)" != *'${{ env.VERSION }}'* ]]; then
             echo 'Version does not match. See version below:'
             ollama-cli --version
             exit 1
