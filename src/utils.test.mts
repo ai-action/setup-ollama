@@ -26,7 +26,7 @@ const cases = platforms.reduce<[NodeJS.Platform, NodeJS.Architecture][]>(
 
 describe.each(['0.13.5', '0.14.0'])('getDownloadObject', (version) => {
   describe.each(cases)(
-    'when platform is %p and arch is %p',
+    'when platform is %s and arch is %s',
     (platform, arch) => {
       beforeEach(() => {
         vi.clearAllMocks();
@@ -42,7 +42,7 @@ describe.each(['0.13.5', '0.14.0'])('getDownloadObject', (version) => {
 });
 
 describe('getBinaryPath', () => {
-  describe.each(platforms)('when OS is %p', (osPlatform) => {
+  describe.each(platforms)('when OS is %s', (osPlatform) => {
     beforeEach(() => {
       vi.clearAllMocks();
       mockedOs.platform.mockReturnValueOnce(osPlatform);
@@ -72,7 +72,7 @@ describe('hasZst', () => {
     ['1.0.0', 'win32', false],
   ] as const;
 
-  describe.each(cases)('when OS is %p', (version, os, expected) => {
+  describe.each(cases)('when OS is %s', (version, os, expected) => {
     beforeEach(() => {
       vi.clearAllMocks();
       mockedOs.platform.mockReturnValueOnce(os);
