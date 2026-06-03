@@ -1,15 +1,15 @@
 import type os from 'node:os';
 
-import { jest } from '@jest/globals';
+import type { Mocked } from 'vitest';
 
-jest.unstable_mockModule('node:os', () => ({
-  platform: jest.fn(),
-  arch: jest.fn(),
+vi.mock('node:os', () => ({
+  platform: vi.fn(),
+  arch: vi.fn(),
 }));
 
 const { getBinaryPath, getDownloadObject, hasZst } = await import('./utils');
 
-const mockedOs = (await import('node:os')) as unknown as jest.Mocked<typeof os>;
+const mockedOs = (await import('node:os')) as unknown as Mocked<typeof os>;
 
 const platforms = ['darwin', 'linux', 'win32'] as const;
 const architectures = ['arm64', 'x64'] as const;
@@ -26,10 +26,10 @@ const cases = platforms.reduce<[NodeJS.Platform, NodeJS.Architecture][]>(
 
 describe.each(['0.13.5', '0.14.0'])('getDownloadObject', (version) => {
   describe.each(cases)(
-    'when platform is %p and arch is %p',
+    'when platform is %s and arch is %s',
     (platform, arch) => {
       beforeEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
         mockedOs.platform.mockReturnValue(platform);
         mockedOs.arch.mockReturnValueOnce(arch);
       });
@@ -42,9 +42,9 @@ describe.each(['0.13.5', '0.14.0'])('getDownloadObject', (version) => {
 });
 
 describe('getBinaryPath', () => {
-  describe.each(platforms)('when OS is %p', (osPlatform) => {
+  describe.each(platforms)('when OS is %s', (osPlatform) => {
     beforeEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
       mockedOs.platform.mockReturnValueOnce(osPlatform);
     });
 
@@ -72,9 +72,9 @@ describe('hasZst', () => {
     ['1.0.0', 'win32', false],
   ] as const;
 
-  describe.each(cases)('when OS is %p', (version, os, expected) => {
+  describe.each(cases)('when OS is %s', (version, os, expected) => {
     beforeEach(() => {
-      jest.clearAllMocks();
+      vi.clearAllMocks();
       mockedOs.platform.mockReturnValueOnce(os);
     });
 

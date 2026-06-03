@@ -4,65 +4,65 @@ import type os from 'node:os';
 import type * as core from '@actions/core';
 import type * as execModule from '@actions/exec';
 import type * as tc from '@actions/tool-cache';
-import { jest } from '@jest/globals';
+import type { Mocked, MockedFunction } from 'vitest';
 
 const name = 'cli-name';
 const pathToTarball = 'path/to/tarball';
 const pathToCLI = 'path/to/cli';
 
-jest.unstable_mockModule('node:child_process', () => ({
-  spawn: jest.fn(),
+vi.mock('node:child_process', () => ({
+  spawn: vi.fn(),
 }));
 
-jest.unstable_mockModule('node:os', () => ({
-  platform: jest.fn(),
-  arch: jest.fn(),
+vi.mock('node:os', () => ({
+  platform: vi.fn(),
+  arch: vi.fn(),
 }));
 
-jest.unstable_mockModule('@actions/core', () => ({
-  getInput: jest.fn(),
-  addPath: jest.fn(),
-  setFailed: jest.fn(),
+vi.mock('@actions/core', () => ({
+  getInput: vi.fn(),
+  addPath: vi.fn(),
+  setFailed: vi.fn(),
 }));
 
-jest.unstable_mockModule('@actions/exec', () => ({
-  exec: jest.fn(),
+vi.mock('@actions/exec', () => ({
+  exec: vi.fn(),
 }));
 
-jest.unstable_mockModule('@actions/tool-cache', () => ({
-  cacheFile: jest.fn(),
-  downloadTool: jest.fn(),
-  extractTar: jest.fn(),
-  extractZip: jest.fn(),
-  find: jest.fn(),
+vi.mock('@actions/tool-cache', () => ({
+  cacheFile: vi.fn(),
+  downloadTool: vi.fn(),
+  extractTar: vi.fn(),
+  extractZip: vi.fn(),
+  find: vi.fn(),
 }));
 
 const { run } = await import('.');
 const { spawn } = await import('node:child_process');
-const mockedOs = (await import('node:os')) as unknown as jest.Mocked<typeof os>;
+const mockedOs = (await import('node:os')) as unknown as Mocked<typeof os>;
 
 const { getInput, addPath, setFailed } =
   (await import('@actions/core')) as unknown as {
-    getInput: jest.MockedFunction<(typeof core)['getInput']>;
-    addPath: jest.MockedFunction<(typeof core)['addPath']>;
-    setFailed: jest.MockedFunction<(typeof core)['setFailed']>;
+    getInput: MockedFunction<(typeof core)['getInput']>;
+    addPath: MockedFunction<(typeof core)['addPath']>;
+    setFailed: MockedFunction<(typeof core)['setFailed']>;
   };
 
 const { exec } = (await import('@actions/exec')) as unknown as {
-  exec: jest.MockedFunction<typeof execModule.exec>;
+  exec: MockedFunction<typeof execModule.exec>;
 };
 
 const { cacheFile, downloadTool, extractTar, extractZip, find } =
   (await import('@actions/tool-cache')) as unknown as {
-    cacheFile: jest.MockedFunction<(typeof tc)['cacheFile']>;
-    downloadTool: jest.MockedFunction<(typeof tc)['downloadTool']>;
-    extractTar: jest.MockedFunction<(typeof tc)['extractTar']>;
-    extractZip: jest.MockedFunction<(typeof tc)['extractZip']>;
-    find: jest.MockedFunction<(typeof tc)['find']>;
+    cacheFile: MockedFunction<(typeof tc)['cacheFile']>;
+    downloadTool: MockedFunction<(typeof tc)['downloadTool']>;
+    extractTar: MockedFunction<(typeof tc)['extractTar']>;
+    extractZip: MockedFunction<(typeof tc)['extractZip']>;
+    find: MockedFunction<(typeof tc)['find']>;
   };
 
 beforeEach(() => {
-  jest.clearAllMocks();
+  vi.clearAllMocks();
   find.mockReturnValue('');
 });
 
@@ -76,7 +76,7 @@ describe.each([
     mockedOs.platform.mockReturnValue(platform as NodeJS.Platform);
     mockedOs.arch.mockReturnValue('arm64');
 
-    getInput.mockImplementation((input) => {
+    getInput.mockImplementation((input: string) => {
       switch (input) {
         case 'version':
           return version;
@@ -98,8 +98,8 @@ describe.each([
     const isWin32 = platform === 'win32';
     const extract = isWin32 ? extractZip : extractTar;
     extract.mockResolvedValueOnce(pathToCLI);
-    const unref = jest.fn();
-    (spawn as jest.MockedFunction<typeof spawn>).mockReturnValueOnce({
+    const unref = vi.fn();
+    (spawn as unknown as MockedFunction<typeof spawn>).mockReturnValueOnce({
       unref,
     } as unknown as ChildProcess);
 

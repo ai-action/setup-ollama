@@ -17,6 +17,9 @@ updates:
         patterns:
           - '*eslint*'
           - prettier
+      vitest:
+        patterns:
+          - '*vitest*'
 
   - package-ecosystem: 'github-actions'
     directory: '/'

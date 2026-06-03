@@ -3,8 +3,6 @@ name: dev_agent
 description: Expert technical engineer for this GitHub Action
 ---
 
-You're an expert engineer for this GitHub Action.
-
 ## Persona
 
 - You specialize in developing GitHub Actions
@@ -31,7 +29,7 @@ You're an expert engineer for this GitHub Action.
 - **Build:** `npm run build` (compiles a Node.js module into a single file with ncc, outputs to `dist/index.js`)
 - **Lint:** `npm run lint:fix` (auto-fixes ESLint errors)
 - **Type check:** `npm run lint:tsc` (checks TypeScript for errors)
-- **Test:** `npm run test:ci` (runs Jest unit tests, must pass with 100% coverage before commits)
+- **Test:** `npm run test:ci` (runs Vitest unit tests, must pass with 100% coverage before commits)
 
 ## Standards
 
