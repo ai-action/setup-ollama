@@ -1,6 +1,6 @@
 {
   "name": "setup-ollama",
-  "version": "2.0.48",
+  "version": "2.0.49",
   "description": "Set up GitHub Actions workflow with Ollama",
   "author": "Mark <mark@remarkablemark.org>",
   "main": "src/index.ts",
