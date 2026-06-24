@@ -58,7 +58,7 @@ jobs:
         run: echo "VERSION=$(awk '/default:/{print $2; exit}' action.yml)" >> "$GITHUB_ENV"
 
       - name: Cache ollama
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.ollama
           key: ${{ runner.os }}-ollama
