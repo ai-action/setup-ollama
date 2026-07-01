@@ -19,8 +19,7 @@ enum Architecture {
 function getArch(arch: NodeJS.Architecture) {
   return (
     (Architecture[arch as keyof typeof Architecture] as
-      | (typeof Architecture)[keyof typeof Architecture]
-      | undefined) ?? arch
+      (typeof Architecture)[keyof typeof Architecture] | undefined) ?? arch
   );
 }
 
