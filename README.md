@@ -44,7 +44,7 @@ Run a prompt against a [model](https://ollama.com/library):
 Cache the model to speed up CI:
 
 ```yaml
-- uses: actions/cache@v5
+- uses: actions/cache@v6
   with:
     path: ~/.ollama
     key: ${{ runner.os }}-ollama
