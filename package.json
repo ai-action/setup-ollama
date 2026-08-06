@@ -1,6 +1,6 @@
 {
   "name": "setup-ollama",
-  "version": "2.0.65",
+  "version": "2.0.66",
   "description": "Set up GitHub Actions workflow with Ollama",
   "author": "Mark <mark@remarkablemark.org>",
   "main": "src/index.ts",
@@ -36,7 +36,7 @@
     "eslint-plugin-prettier": "5.5.6",
     "eslint-plugin-simple-import-sort": "14.0.0",
     "eslint-plugin-tsdoc": "0.5.2",
-    "globals": "17.9.0",
+    "globals": "17.8.0",
     "husky": "9.1.7",
     "vitest": "4.1.10",
     "lint-staged": "17.3.0",
