@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.67](https://github.com/ai-action/setup-ollama/compare/v2.0.66...v2.0.67) (2026-08-07)
+
+
+### Build System
+
+* **deps:** bump undici from 6.27.0 to 6.28.0 ([#660](https://github.com/ai-action/setup-ollama/issues/660)) ([8b93ae4](https://github.com/ai-action/setup-ollama/commit/8b93ae40dfd819196798c6c84af496aad6015007))
+
 ## [2.0.66](https://github.com/ai-action/setup-ollama/compare/v2.0.65...v2.0.66) (2026-08-06)
 
 
