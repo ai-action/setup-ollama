@@ -5,7 +5,7 @@ inputs:
   version:
     description: CLI version
     required: false
-    default: 0.32.9
+    default: 0.32.13
   name:
     description: CLI name
     required: false
