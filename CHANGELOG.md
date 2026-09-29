@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/ai-action/setup-ollama/compare/v2.0.79...v2.1.0) (2026-09-29)
+
+
+### Features
+
+* update build artifacts ([93524f5](https://github.com/ai-action/setup-ollama/commit/93524f50eb894a06786b62097881eb0599814d65))
+
 ## [2.0.79](https://github.com/ai-action/setup-ollama/compare/v2.0.78...v2.0.79) (2026-09-25)
 
 
